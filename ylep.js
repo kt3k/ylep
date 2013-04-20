@@ -6,22 +6,27 @@ window.YLEP = {
     enhancementList: ['branchGenerator', 'setBranchGenerator', 'E'],
 
     enable: function () {
+        'use strict';
         this.enhancementList.forEach(function (keyword) {
             Function.prototype[keyword] = this[keyword];
         }, this);
     },
 
     disable: function () {
+        'use strict';
         this.enhancementList.forEach(function (keyword) {
             delete Function.prototype[keyword];
         });
     },
 
     E: function (decorator) {
+        'use strict';
         return decorator(this);
     },
 
     setBranchGenerator: function (modifier, branchName) {
+        'use strict';
+
         if (branchName == null) {
             branchName = 'branch';
         }
@@ -30,6 +35,7 @@ window.YLEP = {
     },
 
     branchGenerator: function (modifier) {
+        'use strict';
 
         var parent = this;
         modifier = typeof modifier === 'function' ? modifier : function () {};
