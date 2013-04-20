@@ -2,7 +2,7 @@
 # YLEP: YGGS Language Enhancement Pack
 #
 
-window.YLEP =
+@YLEP =
     enhancementList: ['E', 'branchGenerator', 'setBranchGenerator']
 
     enable: ->
