@@ -43,32 +43,30 @@ window.YLEP = {
         // implement inheritance factory method pattern
         return function (additionals) {
 
-            return (function () {
-                var exports = function () {
-                    return new ProxyConstructor(arguments);
-                };
+            var exports = function () {
+                return new ProxyConstructor(arguments);
+            };
 
-                var ProxyConstructor = function (args) {
-                    constructor.apply(this, args);
-                };
+            var ProxyConstructor = function (args) {
+                constructor.apply(this, args);
+            };
 
-                var constructor = additionals.constructor || parent;
-                delete additionals.constructor;
+            var constructor = additionals.constructor || parent;
+            delete additionals.constructor;
 
-                constructor.parent = parent;
+            constructor.parent = parent;
 
-                var classPrototype = ProxyConstructor.prototype = exports.prototype = new parent();
+            var classPrototype = ProxyConstructor.prototype = exports.prototype = new parent();
 
-                classPrototype.constructor = constructor;
+            classPrototype.constructor = constructor;
 
-                Object.keys(additionals).forEach(function (key) {
-                    classPrototype[key] = additionals[key];
-                });
+            Object.keys(additionals).forEach(function (key) {
+                classPrototype[key] = additionals[key];
+            });
 
-                modifier(classPrototype);
+            modifier(classPrototype);
 
-                return exports;
-            }());
+            return exports;
         };
     }
 };

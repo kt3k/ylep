@@ -24,7 +24,7 @@ window.YLEP =
         @branch = @branchGenerator(modifier)
         return
 
-    branchGenerator: (modifier) -> (additionals) => do =>
+    branchGenerator: (modifier) -> (additionals) =>
         exports = ->
             new ProxyConstructor(arguments)
 
