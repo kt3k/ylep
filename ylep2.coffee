@@ -35,12 +35,12 @@
         parent = this
         additionals or= {}
 
-        constructor = additionals.constructor ? parent
+        classPrototype = ProxyConstructor.prototype = exports.prototype = new parent()
+
+        constructor = additionals.constructor ? classPrototype.constructor;
         delete additionals.constructor
 
-        constructor.parent = parent
-
-        classPrototype = ProxyConstructor.prototype = exports.prototype = new parent()
+        constructor.parent = classPrototype.constructor
 
         classPrototype.constructor = constructor
 

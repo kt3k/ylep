@@ -51,12 +51,12 @@ this.YLEP = {
                 constructor.apply(this, args);
             };
 
-            var constructor = additionals.constructor || parent;
+            var classPrototype = ProxyConstructor.prototype = exports.prototype = new parent();
+
+            var constructor = additionals.constructor || classPrototype.constructor;
             delete additionals.constructor;
 
-            constructor.parent = parent;
-
-            var classPrototype = ProxyConstructor.prototype = exports.prototype = new parent();
+            constructor.parent = classPrototype.constructor;
 
             classPrototype.constructor = constructor;
 
