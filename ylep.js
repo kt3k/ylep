@@ -48,21 +48,12 @@ this.YLEP = {
             };
 
             var ProxyConstructor = function (args) {
-                constructor.apply(this, args);
+                classPrototype.constructor.apply(this, args);
             };
 
             var classPrototype = ProxyConstructor.prototype = exports.prototype = new parent();
 
-            var constructor = additionals.constructor || classPrototype.constructor;
-            delete additionals.constructor;
-
-            constructor.parent = classPrototype.constructor;
-
-            classPrototype.constructor = constructor;
-
-            Object.keys(additionals).forEach(function (key) {
-                classPrototype[key] = additionals[key];
-            });
+            additionals(classPrototype, parent.prototype);
 
             modifier(classPrototype);
 

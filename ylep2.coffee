@@ -29,24 +29,13 @@
             new ProxyConstructor(arguments)
 
         ProxyConstructor = (args) ->
-            constructor.apply(this, args)
+            classPrototype.constructor.apply(this, args)
             return
 
-        parent = this
-        additionals or= {}
+        classPrototype = ProxyConstructor.prototype = exports.prototype = new this()
 
-        classPrototype = ProxyConstructor.prototype = exports.prototype = new parent()
-
-        constructor = additionals.constructor ? classPrototype.constructor;
-        delete additionals.constructor
-
-        constructor.parent = classPrototype.constructor
-
-        classPrototype.constructor = constructor
+        additionals(classPrototype, @prototype)
 
         modifier?(additionals)
-
-        for key, property of additionals
-            classPrototype[key] = property
 
         return exports
