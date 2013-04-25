@@ -32,6 +32,8 @@ this.YLEP = {
         }
 
         this[branchName] = this.branchGenerator(modifier);
+
+        return this;
     },
 
     branchGenerator: function (modifier) {
@@ -53,9 +55,17 @@ this.YLEP = {
 
             var classPrototype = ProxyConstructor.prototype = exports.prototype = new parent();
 
-            additionals(classPrototype, parent.prototype);
+            var decorators = {};
+
+            Object.keys(parent.decorators || {}).forEach(function (key) {
+                decorators[key] = parent.decorators[key];
+            });
+
+            additionals(classPrototype, parent.prototype, decorators);
 
             modifier(classPrototype);
+
+            exports.decorators = decorators;
 
             return exports;
         };
