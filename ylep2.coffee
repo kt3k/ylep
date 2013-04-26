@@ -12,7 +12,7 @@
         return
 
     disable: ->
-        @enhancementList.forEach (keyword) =>
+        @enhancementList.forEach (keyword) ->
             delete Function.prototype[keyword]
 
         return
@@ -22,7 +22,7 @@
 
     setBranchGenerator: (modifier) ->
         @branch = @branchGenerator(modifier)
-        return
+        return this
 
     branchGenerator: (modifier) -> (additionals) =>
         exports = ->
@@ -34,7 +34,7 @@
 
         classPrototype = ProxyConstructor.prototype = exports.prototype = new this()
 
-        additionals(classPrototype, @prototype)
+        additionals(classPrototype, @prototype, @decorators)
 
         modifier?(additionals)
 

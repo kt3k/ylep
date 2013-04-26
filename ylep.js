@@ -19,6 +19,16 @@ this.YLEP = {
         });
     },
 
+    enableEFunction: function () {
+        'use strict';
+        Function.prototype.E = YLEP.E;
+    },
+
+    disableEFunction: function () {
+        'use strict';
+        delete Function.prototype.E;
+    },
+
     E: function (decorator) {
         'use strict';
         return decorator(this);
@@ -61,9 +71,13 @@ this.YLEP = {
                 decorators[key] = parent.decorators[key];
             });
 
+            YLEP.enableEFunction();
+
             additionals(classPrototype, parent.prototype, decorators);
 
             modifier(classPrototype);
+
+            YLEP.disableEFunction();
 
             exports.decorators = decorators;
 
@@ -71,3 +85,7 @@ this.YLEP = {
         };
     }
 };
+
+YLEP.enable();
+Object.setBranchGenerator();
+YLEP.disable();
