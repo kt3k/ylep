@@ -63,7 +63,7 @@ this.YLEP = {
                 classPrototype.constructor.apply(this, args);
             };
 
-            var classPrototype = ProxyConstructor.prototype = exports.prototype = new parent();
+            var classPrototype = exports.prototype = new parent();
 
             var decorators = {};
 
@@ -78,6 +78,10 @@ this.YLEP = {
             modifier.call(exports, classPrototype);
 
             YLEP.disableEFunction();
+
+            if (classPrototype.constructor !== parent.prototype.constructor) {
+                classPrototype.constructor.prototype = classPrototype;
+            }
 
             exports.decorators = decorators;
 
