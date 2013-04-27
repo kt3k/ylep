@@ -73,9 +73,9 @@ this.YLEP = {
 
             YLEP.enableEFunction();
 
-            additionals(classPrototype, parent.prototype, decorators);
+            additionals.call(exports, classPrototype, parent.prototype, decorators);
 
-            modifier(classPrototype);
+            modifier.call(exports, classPrototype);
 
             YLEP.disableEFunction();
 
