@@ -5,28 +5,36 @@
 this.YLEP = {
     enhancementList: ['branchGenerator', 'setBranchGenerator', 'E'],
 
+    __enabled__: false,
+
     enable: function () {
         'use strict';
+
+        if (this.__enabled__) {
+            return;
+        }
+
+        this.__enabled__ = true;
+
         this.enhancementList.forEach(function (keyword) {
+            this['__' + keyword] = Function.prototype[keyword];
             Function.prototype[keyword] = this[keyword];
         }, this);
     },
 
     disable: function () {
         'use strict';
+
+        if (!this.__enabled__) {
+            return;
+        }
+
+        this.__enabled__ = false;
+
         this.enhancementList.forEach(function (keyword) {
-            delete Function.prototype[keyword];
-        });
-    },
-
-    enableEFunction: function () {
-        'use strict';
-        Function.prototype.E = YLEP.E;
-    },
-
-    disableEFunction: function () {
-        'use strict';
-        delete Function.prototype.E;
+            Function.prototype[keyword] = this['__' + keyword];
+            delete this['__' + keyword];
+        }, this);
     },
 
     E: function (decorator) {
@@ -71,13 +79,13 @@ this.YLEP = {
                 decorators[key] = parent.decorators[key];
             });
 
-            YLEP.enableEFunction();
+            YLEP.enable();
 
             additionals.call(exports, classPrototype, parent.prototype, decorators);
 
             modifier.call(exports, classPrototype);
 
-            YLEP.disableEFunction();
+            YLEP.disable();
 
             if (classPrototype.constructor !== parent.prototype.constructor) {
                 classPrototype.constructor.prototype = classPrototype;
