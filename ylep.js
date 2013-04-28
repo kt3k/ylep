@@ -42,6 +42,16 @@ this.YLEP = {
         return decorator(this);
     },
 
+    executeOnContext: function (func) {
+        if (YLEP.__enabled__) {
+            func();
+        } else {
+            YLEP.enable();
+            func();
+            YLEP.disable();
+        }
+    },
+
     setBranchGenerator: function (modifier, branchName) {
         'use strict';
 
@@ -79,13 +89,10 @@ this.YLEP = {
                 decorators[key] = parent.decorators[key];
             });
 
-            YLEP.enable();
-
-            additionals.call(exports, classPrototype, parent.prototype, decorators);
-
-            modifier.call(exports, classPrototype);
-
-            YLEP.disable();
+            YLEP.executeOnContext(function () {
+                additionals.call(exports, classPrototype, parent.prototype, decorators);
+                modifier.call(exports, classPrototype);
+            });
 
             if (classPrototype.constructor !== parent.prototype.constructor) {
                 classPrototype.constructor.prototype = classPrototype;
@@ -98,6 +105,6 @@ this.YLEP = {
     }
 };
 
-YLEP.enable();
-Object.setBranchGenerator();
-YLEP.disable();
+YLEP.executeOnContext(function () {
+    Object.setBranchGenerator();
+});
