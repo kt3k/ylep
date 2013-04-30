@@ -105,6 +105,6 @@ this.YLEP = {
     }
 };
 
-YLEP.executeOnContext(function () {
+this.YLEP.executeOnContext(function () {
     Object.setBranchGenerator();
 });
