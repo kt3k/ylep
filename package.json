@@ -1,0 +1,30 @@
+{
+  "name": "ylep",
+  "version": "0.0.1",
+  "description": "JavaScript Language Enhancement Pack for Project YGGS.",
+  "main": "ylep.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kt3k/ylep/blob/master/ylep.js"
+  },
+  "keywords": [
+    "javascript",
+    "object",
+    "inheritance",
+    "class"
+  ],
+  "author": "Yoshiya Hinosawa ( @kt3k )",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "fe3d3372f0994cb055b9f889eef0ca2ddc7731d7",
+  "devDependencies": {
+    "chai": "~1.6.0",
+    "sinon": "~1.6.0",
+    "mocha": "~1.9.0",
+    "sinon-chai": "~2.4.0",
+    "coffee-script": "~1.4.0"
+  }
+}

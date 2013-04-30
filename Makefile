@@ -1,3 +1,6 @@
-.PHONY: test
+REPORTER = nyan
+
 test:
-	NODE_PATH=/usr/local/share/npm/lib/node_modules mocha --compilers coffee:coffee-script spec.coffee --reporter spec
+	./node_modules/mocha/bin/mocha --compilers coffee:coffee-script spec.coffee --reporter $(REPORTER)
+
+.PHONY: test

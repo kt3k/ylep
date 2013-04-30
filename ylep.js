@@ -2,7 +2,7 @@
  * YLEP: YGGS Language Enhancement Pack
  */
 
-this.YLEP = {
+var YLEP = this.YLEP = {
     enhancementList: ['branchGenerator', 'setBranchGenerator', 'E'],
 
     __enabled__: false,
@@ -105,6 +105,6 @@ this.YLEP = {
     }
 };
 
-this.YLEP.executeOnContext(function () {
+YLEP.executeOnContext(function () {
     Object.setBranchGenerator();
 });
