@@ -1,4 +1,7 @@
 YLEP: YGGS Language Enhancement Pack
+------------------------------------
+
+[![Build Status](https://travis-ci.org/kt3k/ylep.png?branch=master)](https://travis-ci.org/kt3k/ylep)
 
 It provides Function.prototype enhancement. See source code for detail.
 
