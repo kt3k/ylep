@@ -12,7 +12,7 @@ cov: ylep-cov.js
 
 test-coveralls: ylep-cov.js
 	echo TRAVIS_JOB_ID $(TRAVIS_JOB_ID)
-	@YLEP_COVERAGE=1 $(MAKE) test REPOTER=json-cov | ./node_modules/.bin/coveralls
+	@YLEP_COVERAGE=1 $(MAKE) test REPOTER=mocha-lcov-reporter | ./node_modules/.bin/coveralls
 	@rm ylep-cov.js
 
 .PHONY: test
