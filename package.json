@@ -25,6 +25,8 @@
     "sinon": "~1.6.0",
     "mocha": "~1.9.0",
     "sinon-chai": "~2.4.0",
-    "coffee-script": "~1.4.0"
+    "coffee-script": "~1.4.0",
+    "mocha-lcov-reporter": "0.0.1",
+    "jscoverage": "~0.3.6"
   }
 }

@@ -4,7 +4,12 @@ sinon = require 'sinon'
 sinonChai = require 'sinon-chai'
 chai.use sinonChai
 
-YLEP = require('./ylep').YLEP
+if process.env.YLEP_COVERAGE
+  dir = './ylep-cov'
+else
+  dir = './ylep'
+
+YLEP = require(dir).YLEP
 
 describe 'YLEP', ->
   describe 'enable', ->

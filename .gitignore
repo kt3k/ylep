@@ -1,3 +1,5 @@
 ylep2.js
 .DS_Store
 node_modules
+coverage.html
+ylep-cov.js
