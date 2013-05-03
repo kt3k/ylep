@@ -81,6 +81,15 @@ describe 'YLEP', ->
         expect(a.branchGenerator).to.be.a 'function'
         expect(a.setBranchGenerator).to.be.a 'function'
 
+    it "doesn't disable YLEP context when enabled", ->
+      YLEP.enable()
+
+      YLEP.executeOnContext ->
+
+      expect(Function.prototype.E).to.exist
+      expect(Function.prototype.branchGenerator).to.exist
+      expect(Function.prototype.setBranchGenerator).to.exist
+
 describe 'Object.branch', ->
 
   it 'is a function', ->
@@ -88,10 +97,11 @@ describe 'Object.branch', ->
 
   it 'takes func and creates a class inherits Object.', ->
     cls = Object.branch(->)
-    inst = new cls()
     expect(cls).to.be.a 'function'
-    expect(inst).to.be.instanceof cls
-    expect(inst).to.be.instanceof Object
+    expect(new cls()).to.be.instanceof cls
+    expect(cls()).to.be.instanceof cls
+    expect(new cls()).to.be.instanceof Object
+    expect(cls()).to.be.instanceof Object
 
   describe 'takes function (prototype, parent, decorators) {}', ->
 
@@ -104,8 +114,12 @@ describe 'Object.branch', ->
         cls = Object.branch (prototype, parent, decorators) ->
 
           x = prototype
+          prototype.constructor = ->
 
         expect(cls.prototype).to.equals x
+        expect(new cls()).to.be.instanceof cls
+        expect(cls()).to.be.instanceof cls
+        expect(new cls.prototype.constructor).to.be.instanceof cls
 
     describe 'in which parent', ->
 
@@ -114,7 +128,7 @@ describe 'Object.branch', ->
         Object.branch (prototype, parent, decorators) ->
           expect(parent).to.equals Object.prototype
 
-    describe 'in whith decorators', ->
+    describe 'in which decorators', ->
 
       it 'equals cls.decorators', ->
 
@@ -124,6 +138,15 @@ describe 'Object.branch', ->
           x = decorators
 
         expect(x).to.equals cls.decorators
+
+      it 'will be extended if extended inside branching function', ->
+
+        x = ->
+
+        cls = Object.branch (prototype, parent, decorators) ->
+          decorators.abc = x
+
+        expect(cls.decorators.abc).to.equals x
 
 describe 'inside YLEP(function() {...})', ->
 
