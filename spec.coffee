@@ -37,6 +37,15 @@ describe 'YLEP', ->
       expect(Function.prototype.branchGenerator).to.be.a 'function'
       expect(Function.prototype.setBranchGenerator).to.be.a 'function'
 
+    it 'do nothing when called twice', ->
+      expect(Function.prototype.E).to.be.a 'function'
+      expect(Function.prototype.branchGenerator).to.be.a 'function'
+      expect(Function.prototype.setBranchGenerator).to.be.a 'function'
+      YLEP.enable()
+      expect(Function.prototype.E).to.be.a 'function'
+      expect(Function.prototype.branchGenerator).to.be.a 'function'
+      expect(Function.prototype.setBranchGenerator).to.be.a 'function'
+
   describe 'disable', ->
 
     it 'is a function', ->
@@ -46,6 +55,15 @@ describe 'YLEP', ->
       expect(Function.prototype.E).to.exist
       expect(Function.prototype.branchGenerator).to.exist
       expect(Function.prototype.setBranchGenerator).to.exist
+      YLEP.disable()
+      expect(Function.prototype.E).to.not.exist
+      expect(Function.prototype.branchGenerator).to.not.exist
+      expect(Function.prototype.setBranchGenerator).to.not.exist
+
+    it 'does nothing when called twice', ->
+      expect(Function.prototype.E).to.not.exist
+      expect(Function.prototype.branchGenerator).to.not.exist
+      expect(Function.prototype.setBranchGenerator).to.not.exist
       YLEP.disable()
       expect(Function.prototype.E).to.not.exist
       expect(Function.prototype.branchGenerator).to.not.exist
