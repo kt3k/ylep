@@ -2,14 +2,17 @@
  * YLEP: YGGS Language Enhancement Pack
  */
 
-var YLEP = this.YLEP = {
-    enhancementList: ['branchGenerator', 'setBranchGenerator', 'E'],
+var YLEP = this.YLEP = (function () {
 
-    __enabled__: false,
+    var YLEP = function (func) {
+        YLEP.executeOnContext(func);
+    };
 
-    enable: function () {
-        'use strict';
+    YLEP.__enabled__ = false;
 
+    YLEP.enhancementList = ['branchGenerator', 'setBranchGenerator', 'E'];
+
+    YLEP.enable = function () {
         if (this.__enabled__) {
             return;
         }
@@ -18,13 +21,11 @@ var YLEP = this.YLEP = {
 
         this.enhancementList.forEach(function (keyword) {
             this['__' + keyword] = Function.prototype[keyword];
-            Function.prototype[keyword] = this[keyword];
+            Function.prototype[keyword] = this.extensions[keyword];
         }, this);
     },
 
-    disable: function () {
-        'use strict';
-
+    YLEP.disable = function () {
         if (!this.__enabled__) {
             return;
         }
@@ -35,14 +36,9 @@ var YLEP = this.YLEP = {
             Function.prototype[keyword] = this['__' + keyword];
             delete this['__' + keyword];
         }, this);
-    },
+    };
 
-    E: function (decorator) {
-        'use strict';
-        return decorator(this);
-    },
-
-    executeOnContext: function (func) {
+    YLEP.executeOnContext = function (func) {
         if (YLEP.__enabled__) {
             func();
         } else {
@@ -50,11 +46,15 @@ var YLEP = this.YLEP = {
             func();
             YLEP.disable();
         }
-    },
+    };
 
-    setBranchGenerator: function (modifier, branchName) {
-        'use strict';
+    var extensions = YLEP.extensions = {};
 
+    extensions.E = function (decorator) {
+        return decorator(this);
+    };
+
+    extensions.setBranchGenerator = function (modifier, branchName) {
         if (branchName == null) {
             branchName = 'branch';
         }
@@ -62,11 +62,9 @@ var YLEP = this.YLEP = {
         this[branchName] = this.branchGenerator(modifier);
 
         return this;
-    },
+    };
 
-    branchGenerator: function (modifier) {
-        'use strict';
-
+    extensions.branchGenerator = function (modifier) {
         var parent = this;
         modifier = typeof modifier === 'function' ? modifier : function () {};
 
@@ -102,9 +100,11 @@ var YLEP = this.YLEP = {
 
             return exports;
         };
-    }
-};
+    };
 
-YLEP.executeOnContext(function () {
+    return YLEP;
+}());
+
+YLEP(function () {
     Object.setBranchGenerator();
 });
