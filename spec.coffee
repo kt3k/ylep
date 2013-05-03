@@ -148,6 +148,17 @@ describe 'Object.branch', ->
 
         expect(cls.decorators.abc).to.equals x
 
+      it 'inherits parent decorators if parent have decorators', ->
+
+        y = ->
+
+        parent = Object.branch (prototype, parent, decorators) ->
+          decorators.abc = y
+          this.setBranchGenerator()
+
+        parent.branch (prototype, parent, decorators) ->
+          expect(decorators.abc).to.equals y
+
 describe 'inside YLEP(function() {...})', ->
 
   describe 'func.E(decorator)', ->
