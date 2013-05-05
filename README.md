@@ -1,3 +1,5 @@
+[![YLEP](https://raw.github.com/kt3k/ylep/master/ylep.png)](https://github.com/kt3k/ylep)
+
 YLEP: YGGS Language Enhancement Pack
 ------------------------------------
 
