@@ -107,4 +107,14 @@ var YLEP = this.YLEP = (function () {
 
 YLEP(function () {
     Object.setBranchGenerator();
+
+    Object.decorators = {};
+
+    Object.decorators.Chainable = function (func) {
+        return function () {
+            func.apply(this, arguments);
+
+            return this;
+        };
+    };
 });

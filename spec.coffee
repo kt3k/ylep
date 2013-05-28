@@ -198,3 +198,29 @@ describe 'inside YLEP(function() {...})', ->
         func.setBranchGenerator()
 
       expect(func.branch).to.be.a 'function'
+
+describe 'Object', ->
+
+  it 'has branch method', ->
+
+    expect(Object.branch).to.be.a 'function'
+
+  it 'has decorators property', ->
+
+    expect(Object.decorators).to.be.a 'object'
+
+  describe 'decorators', ->
+
+    it 'has Chainable decorator.', ->
+
+      expect(Object.decorators.Chainable).to.be.a 'function'
+
+    describe 'Chainable', ->
+
+      it 'return function chainable', ->
+
+        a = {}
+
+        a.b = Object.decorators.Chainable ->
+
+        expect(a.b()).to.equals a
