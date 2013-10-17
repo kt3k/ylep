@@ -1,9 +1,49 @@
 [![YLEP](https://raw.github.com/kt3k/ylep/master/ylep.png)](https://github.com/kt3k/ylep)
 
 YLEP: Language Enhancement Pack [![Build Status](https://travis-ci.org/kt3k/ylep.png?branch=master)](https://travis-ci.org/kt3k/ylep) [![Coverage Status](https://coveralls.io/repos/kt3k/ylep/badge.png?branch=master)](https://coveralls.io/r/kt3k/ylep)
-------------------------------
+===============================
 
-It provides Function.prototype enhancement. See source code for details.
+It provides two functionality:
+
+- add syntax for class inheritance
+- add syntax for AOP
+
+class inheritance
+-----------------
+
+```
+var Klass = Object.branch(); // new class with equal functionality of Object
+
+var Clazz = Klazz.branch(function (prototype) {
+
+    prototype.say = function () {
+        console.log('hello');
+    };
+
+});
+```
+
+AOP
+---
+```
+var Clazz = Object.branch(function (prototype) {
+
+    prototype.say = function () {
+        console.log('hello! ');
+    }
+    .E(Chainable); // AOP syntax !
+
+});
+
+var obj = new Clazz();
+obj.say().say().say(); // prints "hello! hello! hello!"
+```
+
+
+
+
+TEST SPEC
+---------
 
 
 ```
