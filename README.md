@@ -39,6 +39,17 @@ var obj = new Clazz();
 obj.say().say().say(); // prints "hello! hello! hello!"
 ```
 
+Author
+------
+
+Yosiya Hinosawa [@kt3k](https://twitter.com/kt3k)
+
+
+License
+-------
+
+MIT License
+http://kt3k.mit-license.org/
 
 
 
