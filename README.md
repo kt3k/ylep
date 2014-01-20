@@ -1,60 +1,68 @@
 [![YLEP](https://raw.github.com/kt3k/ylep/master/ylep.png)](https://github.com/kt3k/ylep)
 
-YLEP: Language Enhancement Pack [![Build Status](https://travis-ci.org/kt3k/ylep.png?branch=master)](https://travis-ci.org/kt3k/ylep) [![Coverage Status](https://coveralls.io/repos/kt3k/ylep/badge.png?branch=master)](https://coveralls.io/r/kt3k/ylep)
-===============================
+# YLEP: Language Enhancement Pack
+
+[![Build Status](https://travis-ci.org/kt3k/ylep.png?branch=master)](https://travis-ci.org/kt3k/ylep) [![Coverage Status](https://coveralls.io/repos/kt3k/ylep/badge.png?branch=master)](https://coveralls.io/r/kt3k/ylep)
 
 It provides two functionality:
 
 - add syntax for class inheritance
-- add syntax for AOP
+- add syntax for method decoration (similar to python's method decorator)
 
-class inheritance
------------------
+# Class Inheritance
 
 ```
 var Klass = Object.branch(); // new class with equal functionality of Object
 
-var Clazz = Klazz.branch(function (prototype) {
+var Clazz = Object.branch(function (prototype) {
 
     prototype.say = function () {
         console.log('hello');
     };
 
 });
+
+var a = new Clazz();
+a.say() // => prints "hello"
 ```
 
-AOP
----
+# Method Decorator
+
 ```
 var Clazz = Object.branch(function (prototype) {
 
     prototype.say = function () {
         console.log('hello! ');
     }
-    .E(Chainable); // AOP syntax !
+    .E(Chainable);
+    // method decoration by E syntax
+    //
+    // The above means `prototype.say = E(prototype.say);`
+    //
+    // This is same as python's decorator like:
+    //
+    // @Chainable
+    // def say(): ...
 
 });
 
-var obj = new Clazz();
-obj.say().say().say(); // prints "hello! hello! hello!"
+var a = new Clazz();
+a.say().say().say(); // prints "hello! hello! hello!"
 ```
 
-Author
-------
+# Author
 
 Yosiya Hinosawa [@kt3k](https://twitter.com/kt3k)
 
 
-License
--------
+# License
 
 MIT License
 http://kt3k.mit-license.org/
 
 
 
-TEST SPEC
----------
+# Module Spec
 
 
 ```
