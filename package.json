@@ -21,13 +21,13 @@
   "readmeFilename": "README.md",
   "gitHead": "fe3d3372f0994cb055b9f889eef0ca2ddc7731d7",
   "devDependencies": {
-    "chai": "~1.6.0",
-    "sinon": "~1.6.0",
-    "mocha": "~1.9.0",
-    "sinon-chai": "~2.4.0",
-    "coffee-script": "~1.4.0",
-    "mocha-lcov-reporter": "0.0.1",
-    "jscoverage": "~0.3.6",
-    "coveralls": "~2.0.7"
+    "chai": "~3.5.0",
+    "sinon": "~1.17.7",
+    "mocha": "~3.2.0",
+    "sinon-chai": "~2.8.0",
+    "coffee-script": "~1.12.2",
+    "mocha-lcov-reporter": "1.2.0",
+    "jscoverage": "~0.6.0",
+    "coveralls": "~2.11.15"
   }
 }
